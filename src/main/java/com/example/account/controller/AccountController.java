@@ -1,12 +1,12 @@
 package com.example.account.controller;
 
 import com.example.account.domain.Account;
+import com.example.account.dto.CreateAccount;
 import com.example.account.service.AccountService;
 import com.example.account.service.RedisTestService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,20 +15,23 @@ public class AccountController { // Controller -> Service
     private final RedisTestService redisTestService;
 
 
-    @GetMapping("/get-lock")
-    public String getLock(){
-        return redisTestService.getLock();
-    }
+    @PostMapping("/account")
+    public CreateAccount.Response createAccount(
+            @RequestBody @Valid CreateAccount.Request request) {
 
-    @GetMapping("/create-account")
-    public String createAccount(){
-        accountService.createAccount();
+        accountService.createAccount(request.getUserId()
+                , request.getInitialBanlance());
         return "success create account";
     }
 
+    @GetMapping("/get-lock")
+    public String getLock() {
+        return redisTestService.getLock();
+    }
+
     @GetMapping("/account/{id}")
-    public Account getAccount(@PathVariable Long id){
-    return accountService.getAccount(id);
+    public Account getAccount(@PathVariable Long id) {
+        return accountService.getAccount(id);
     }
 
 }

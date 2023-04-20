@@ -1,7 +1,9 @@
 package com.example.account.domain;
 
-import com.example.account.type.AccountStatus;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -11,25 +13,17 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @EntityListeners(AuditingEntityListener.class)
-public class Account { //account table을 만드는 과정
+public class AccountUser {
+
     @Id
-    @GeneratedValue //primary key로 사용한다는 뜻
+    @GeneratedValue
     private Long id;
-
-    @ManyToOne
-    private AccountUser accountUser;
-    private String accountNumber;
-    @Enumerated(EnumType.STRING)
-    private AccountStatus accountStatus;
-    private Long balance;
-
-    private LocalDateTime registeredAt;
-    private LocalDateTime unRegisteredAt;
+    private String name;
 
     @CreatedDate
     private LocalDateTime createAt;
