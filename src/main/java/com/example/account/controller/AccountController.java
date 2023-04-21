@@ -19,9 +19,10 @@ public class AccountController { // Controller -> Service
     public CreateAccount.Response createAccount(
             @RequestBody @Valid CreateAccount.Request request) {
 
-        accountService.createAccount(request.getUserId()
-                , request.getInitialBanlance());
-        return "success create account";
+        return CreateAccount.Response.from(
+                accountService.createAccount(
+                        request.getUserId(),
+                        request.getInitialBalance()));
     }
 
     @GetMapping("/get-lock")

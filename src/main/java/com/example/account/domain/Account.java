@@ -32,9 +32,9 @@ public class Account { //account table을 만드는 과정
     private LocalDateTime unRegisteredAt;
 
     @CreatedDate
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
     @LastModifiedDate
-    private LocalDateTime updateAt;
+    private LocalDateTime updatedAt;
 
 
 }

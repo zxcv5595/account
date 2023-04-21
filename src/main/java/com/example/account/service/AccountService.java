@@ -30,7 +30,7 @@ public class AccountService { // Service -> Repository
     public AccountDto createAccount(Long userId, Long initialBalance) {
         AccountUser accountUser = accountUserRepository.findById(userId)
                 .orElseThrow(() -> new AccountException(ErrorCode.USER_NOT_FOUND));
-        String newAccountNumber = accountRepository.findFirstByOrOrderByIdDesc()
+        String newAccountNumber = accountRepository.findFirstByOrderByIdDesc()
                 .map(account -> Integer.parseInt(account.getAccountNumber()) + 1 + "")
                 .orElse("1000000000");
 
