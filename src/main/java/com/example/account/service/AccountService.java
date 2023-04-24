@@ -21,11 +21,6 @@ public class AccountService { // Service -> Repository
     private final AccountRepository accountRepository;
     private final AccountUserRepository accountUserRepository;
 
-    /**
-     * 사용자가 존재하는지 확인
-     * 계좌번호 생성
-     * 계좌번호 저장, 전송
-     */
     @Transactional
     public AccountDto createAccount(Long userId, Long initialBalance) {
         AccountUser accountUser = accountUserRepository.findById(userId)
@@ -33,6 +28,8 @@ public class AccountService { // Service -> Repository
         String newAccountNumber = accountRepository.findFirstByOrderByIdDesc()
                 .map(account -> Integer.parseInt(account.getAccountNumber()) + 1 + "")
                 .orElse("1000000000");
+
+        validateCreateAccount(accountUser);
 
 
         return AccountDto.fromEntity(accountRepository.save(Account
@@ -44,6 +41,13 @@ public class AccountService { // Service -> Repository
                 .registeredAt(LocalDateTime.now())
                 .build()));
 
+    }
+
+    private void validateCreateAccount(AccountUser accountUser) {
+        if(accountRepository.countByAccountUser(accountUser)>=10)
+        {
+            throw new AccountException(ErrorCode.MAX_ACCOUNT_PER_USER_10);
+        }
     }
 
     @Transactional
