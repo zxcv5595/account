@@ -8,13 +8,7 @@ import java.time.LocalDateTime;
 
 public class UseBalance {
 
-    /**
-     * {
-     * "userId":1,
-     * "accountNumber":"1000000000",
-     * "amount":1000
-     * }
-     */
+
     @Getter
     @Setter
     @AllArgsConstructor
@@ -33,15 +27,7 @@ public class UseBalance {
         private Long amount;
     }
 
-    /**
-     * {
-     * "accountNumber":"1234567890",
-     * "transactionResult":"S",
-     * "transactionId":"c2033bb6d82a4250aecf8e27c49b63f6",
-     * "amount":1000,
-     * "transactedAt":"2022-06-01T23:26:14.671859"
-     * }
-     */
+
     @Getter
     @Setter
     @NoArgsConstructor
