@@ -43,9 +43,8 @@ class AccountServiceTest {
         //given
 
         AccountUser user = AccountUser.builder()
-                .id(125L)
                 .name("Pobi").build();
-//
+        user.setId(125L);
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(user));
 
@@ -73,9 +72,8 @@ class AccountServiceTest {
         //given
 
         AccountUser user = AccountUser.builder()
-                .id(125L)
                 .name("Pobi").build();
-//
+        user.setId(125L);
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(user));
 
@@ -117,9 +115,8 @@ class AccountServiceTest {
     void deleteAccount_NotFoundAccount() {
         //given
         AccountUser user = AccountUser.builder()
-                .id(125L)
                 .name("Pobi").build();
-
+        user.setId(125L);
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(user));
         given(accountRepository.findByAccountNumber(anyString()))
@@ -136,12 +133,11 @@ class AccountServiceTest {
     void deleteAccount_UnMatchUser() {
         //given
         AccountUser pobi = AccountUser.builder()
-                .id(125L)
                 .name("Pobi").build();
+        pobi.setId(125L);
         AccountUser harry = AccountUser.builder()
-                .id(12L)
                 .name("Harry").build();
-
+        harry.setId(12L);
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(pobi));
         given(accountRepository.findByAccountNumber(anyString()))
@@ -162,9 +158,8 @@ class AccountServiceTest {
     void deleteAccount_NotEmptyBalance() {
         //given
         AccountUser pobi = AccountUser.builder()
-                .id(125L)
                 .name("Pobi").build();
-
+        pobi.setId(125L);
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(pobi));
         given(accountRepository.findByAccountNumber(anyString()))
@@ -185,9 +180,8 @@ class AccountServiceTest {
     void deleteAccount_AlreadyUnregistered() {
         //given
         AccountUser pobi = AccountUser.builder()
-                .id(125L)
                 .name("Pobi").build();
-
+        pobi.setId(125L);
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(pobi));
         given(accountRepository.findByAccountNumber(anyString()))
@@ -209,9 +203,8 @@ class AccountServiceTest {
         //given
 
         AccountUser user = AccountUser.builder()
-                .id(125L)
                 .name("Pobi").build();
-//
+        user.setId(125L);
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(user));
 
@@ -252,9 +245,8 @@ class AccountServiceTest {
     void createAccount_MaxAccountIs10() {
         //given
         AccountUser user = AccountUser.builder()
-                .id(125L)
                 .name("Pobi").build();
-//
+        user.setId(125L);
         given(accountUserRepository.findById(anyLong()))
                 .willReturn(Optional.of(user));
         given(accountRepository.countByAccountUser(any()))
@@ -272,8 +264,8 @@ class AccountServiceTest {
     void successGetAccountByUserId() {
         //given
         AccountUser user = AccountUser.builder()
-                .id(125L)
                 .name("Pobi").build();
+        user.setId(125L);
         List<Account> accounts = Arrays.asList(Account.builder()
                         .accountUser(user)
                         .accountNumber("1234567890")
